@@ -36,7 +36,7 @@ const CPFGenerator: React.FC = () => {
       <div className="max-w-[500px] w-full h-full flex flex-col space-y-4 items-center justify-center">
         <div className="flex flex-col items-center justify-center space-y-6 my-5">
           <h1 className="text-4xl font-semibold tracking-tighter">Gerador de CPF</h1>
-          <p className="text-lg text-muted-foreground font-normal leading-6 tracking-tighter text-center">Utilize nosso gerador de cpf, basta clicar em "Gerar CPF" e pronto, um novo número de CPF válido será gerado.</p>
+          <p className="text-lg text-muted-foreground font-normal leading-6 tracking-tighter text-center">Utilize nosso gerador de cpf, basta clicar em &quot;Gerar CPF&quot; e pronto, um novo número de CPF válido será gerado.</p>
         </div>
         <Button className='w-full max-w-[300px] mt-8' onClick={handleGenerate}>Gerar CPF</Button>
         <div className="flex space-x-2 w-full max-w-[300px] mx-auto">
