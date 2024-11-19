@@ -5,8 +5,23 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
-  title: "Geradoor",
-  description: "Gerador de coiso",
+  title: {
+    default: "Geradoor",
+    template: `%s | Geradoor`,
+  },
+  openGraph: {
+    description: "Gerador de",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Geradoor",
+      },
+    ]
+  },
+  metadataBase: new URL("https://www.geradoor.com"),
+  keywords: ["gerador", "cpf", "gerador de cpf", "gerador de coiso"],
 };
 
 export default function RootLayout({
