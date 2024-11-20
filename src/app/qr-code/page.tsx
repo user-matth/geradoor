@@ -60,7 +60,7 @@ const QRCodeGenerator: React.FC = () => {
               para criar um QRCode
             </p>
           </div>
-          <div className="flex space-x-2 w-full max-w-[250px] mx-auto">
+          <div className="flex space-x-2 w-full max-w-[320px] mx-auto">
             <Input
               type="text"
               placeholder="https://"
@@ -69,7 +69,7 @@ const QRCodeGenerator: React.FC = () => {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
-          <Button className="w-full max-w-[250px] mt-8" onClick={handleGenerate}>
+          <Button className="w-full max-w-[320px] mt-8" onClick={handleGenerate}>
             Criar
           </Button>
         </motion.div>
@@ -77,21 +77,28 @@ const QRCodeGenerator: React.FC = () => {
 
       {qrCodeValue && (
         <motion.div
-          className="max-w-screen-sm w-full h-full flex flex-col space-y-2 items-center justify-center"
+          className="max-w-screen-sm w-full h-full flex flex-col space-y-4 items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Button variant='link' onClick={() => setQrCodeValue(null)}>
-            <ArrowLeft className="w-4 h-4" />
-            Voltar
-          </Button>
+          <div className="max-w-[200px] w-full flex items-start">
+            <Button variant='link' className="px-0" onClick={() => setQrCodeValue(null)}>
+              <ArrowLeft className="w-4 h-4" />
+              Voltar
+            </Button>
+          </div>
           <QRCodeSVG
             value={qrCodeValue}
             size={200}
-            fgColor={theme === "dark" ? "white" : "black"} // Cor do código QR
-            bgColor={theme === "dark" ? "black" : "white"} // Cor de fundo
+            fgColor={theme === "dark" ? "white" : "black"}
+            bgColor={theme === "dark" ? "black" : "white"}
           />
+          <div className="grid grid-cols-3 gap-4 max-w-[400px] w-full mt-8">
+            <Button variant='outline' className="">PNG</Button>
+            <Button variant='outline' className="">PDF</Button>
+            <Button variant='outline' className="">SVG</Button>
+          </div>
         </motion.div>
       )}
 

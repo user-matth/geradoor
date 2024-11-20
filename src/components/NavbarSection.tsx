@@ -32,6 +32,23 @@ const NavbarSection: React.FC = () => {
           <DoorOpen className="w-4 h-4" />
           Geradoor
         </Button>
+        <div className="mx-auto">
+          <Button variant="ghost" asChild>
+            <Link href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
+              CPF
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href={'/qr-code'} className={currentPath === '/qr-code' ? '' : 'text-zinc-500'}>
+              QRCode
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href={'/whatsapp'} className={currentPath === '/whatsapp' ? '' : 'text-zinc-500'}>
+              Whatsapp
+            </Link>
+          </Button>
+        </div>
         <Button variant="link" asChild>
           <Link href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'} target='_blank' className="ms-auto text-zinc-400">
             API

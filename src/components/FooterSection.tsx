@@ -3,7 +3,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { IdCard, ScanLine, Square } from "lucide-react";
+import { IdCard, MessageCircleMore, ScanLine, Square } from "lucide-react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
@@ -73,6 +73,23 @@ const FooterSection: React.FC<FooterSectionProps> = ({ toggleTheme }) => {
           <Link href={"/qr-code"}>
             <Button variant="ghost" size="icon" className="rounded-lg [&_svg]:size-5">
               <ScanLine className="text-muted-foreground/50 dark:stroke-primary-dark-12 h-5 w-5" />
+            </Button>
+          </Link>
+        )}
+        {currentPath === "/whatsapp" ? (
+          <Link href={"/whatsapp"}>
+            <Button
+              variant="secondary"
+              size="icon"
+              className="rounded-lg [&_svg]:size-5"
+            >
+              <MessageCircleMore className="stroke-primary-light-12 dark:stroke-primary-dark-12 h-5 w-5" />
+            </Button>
+          </Link>
+        ) : (
+          <Link href={"/whatsapp"}>
+            <Button variant="ghost" size="icon" className="rounded-lg [&_svg]:size-5">
+              <MessageCircleMore className="text-muted-foreground/50 dark:stroke-primary-dark-12 h-5 w-5" />
             </Button>
           </Link>
         )}
