@@ -172,7 +172,7 @@ const WhatsappLinkGenerator: React.FC = () => {
                 value={message ?? ""}
                 onChange={(e) => setMessage(e.target.value)}
               />
-              <p className="mt-2 font-normal text-sm tracking-tight leading-4">Exemplo: "Olá, eu gostaria de receber mais informações sobre o produto"</p>
+              <p className="mt-2 font-normal text-sm tracking-tight leading-4">Exemplo: &quot;Olá, eu gostaria de receber mais informações sobre o produto&quot;</p>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button className="w-full mt-8" onClick={handleGenerate} disabled={phone == ""}>
