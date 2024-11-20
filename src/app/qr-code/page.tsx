@@ -9,11 +9,13 @@ import { motion } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react"; // Importando corretamente
 import FooterSection from "@/components/FooterSection";
 import NavbarSection from "@/components/NavbarSection";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
 
 const QRCodeGenerator: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [qrCodeValue, setQrCodeValue] = useState<string | null>("");
+  const [loadingQrCode, setLoadingQrCode] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -23,13 +25,94 @@ const QRCodeGenerator: React.FC = () => {
     }
   }, [theme]);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!inputValue) {
       toast.error("Por favor, preencha o link antes de gerar o QR Code");
       return;
     }
-    setQrCodeValue(inputValue);
+
+    const shortcode = uuidv4().slice(0, 6);
+    const baseUrl = "https://www.geradoor.com/";
+
+    try {
+      setLoadingQrCode(true);
+      const response = await fetch("/api/qrcode", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: inputValue, shortcode }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao criar QR Code");
+      }
+
+      const data = await response.json();
+      setQrCodeValue(baseUrl + data.shortcode);
+      setLoadingQrCode(false);
+      toast.success("QR Code criado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao criar QR Code:", error);
+      toast.error("Erro ao criar QR Code");
+      setLoadingQrCode(false);
+    }
   };
+
+  const downloadQRCode = (filetype: string) => {
+    const svgElement = document.querySelector(".qrcode-svg");
+  
+    if (!svgElement) {
+      toast.error("QR Code não encontrado!");
+      return;
+    }
+  
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+  
+    if (filetype === "svg") {
+      const blob = new Blob([svgData], { type: "image/svg+xml" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "qrcode.svg";
+      link.click();
+      URL.revokeObjectURL(url);
+    } else {
+      const img = new Image();
+      img.onload = () => {
+        const scale = 4;
+        const size = 200;
+  
+        canvas.width = size * scale;
+        canvas.height = size * scale;
+  
+        ctx?.scale(scale, scale);
+        ctx?.drawImage(img, 0, 0, size, size);
+  
+        if (filetype === "png") {
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.download = "qrcode.png";
+              link.click();
+              URL.revokeObjectURL(url);
+            }
+          }, "image/png");
+        } else if (filetype === "pdf") {
+          import("jspdf").then((jsPDF) => {
+            const pdf = new jsPDF.default();
+            const imgData = canvas.toDataURL("image/png");
+            pdf.addImage(imgData, "PNG", 10, 10, 180, 180);
+            pdf.save("qrcode.pdf");
+          });
+        }
+      };
+  
+      img.src = "data:image/svg+xml;base64," + btoa(svgData);
+    }
+  };  
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -45,7 +128,7 @@ const QRCodeGenerator: React.FC = () => {
       ></motion.div>
       <NavbarSection />
 
-      {!qrCodeValue && (
+      {(!qrCodeValue && !loadingQrCode) && (
         <motion.div
           className="max-w-screen-sm w-full h-full flex flex-col space-y-2 items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
@@ -69,11 +152,22 @@ const QRCodeGenerator: React.FC = () => {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
-          <Button className="w-full max-w-[320px] mt-8" onClick={handleGenerate}>
+          <Button className="w-full max-w-[320px] mt-8" onClick={handleGenerate} disabled={inputValue == ""}>
             Criar
           </Button>
         </motion.div>
       )}
+
+      { loadingQrCode && (
+        <motion.div 
+          className="flex items-center justify-center w-full h-full py-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          >
+          <Loader className="animate-spin rounded-full h-5 w-5"/>
+        </motion.div>
+      ) }
 
       {qrCodeValue && (
         <motion.div
@@ -88,16 +182,17 @@ const QRCodeGenerator: React.FC = () => {
               Voltar
             </Button>
           </div>
-          <QRCodeSVG
-            value={qrCodeValue}
-            size={200}
-            fgColor={theme === "dark" ? "white" : "black"}
-            bgColor={theme === "dark" ? "black" : "white"}
-          />
-          <div className="grid grid-cols-3 gap-4 max-w-[400px] w-full mt-8">
-            <Button variant='outline' className="">PNG</Button>
-            <Button variant='outline' className="">PDF</Button>
-            <Button variant='outline' className="">SVG</Button>
+          <div className="bg-white p-4">
+            <QRCodeSVG
+              value={qrCodeValue}
+              size={180}
+              className="qrcode-svg"
+            />
+          </div>
+          <div className="flex flex-col gap-2 max-w-[200px] w-full mt-8">
+            <Button variant='outline' onClick={() => downloadQRCode("png")}>PNG</Button>
+            <Button variant='outline' onClick={() => downloadQRCode("pdf")}>PDF</Button>
+            <Button variant='outline' onClick={() => downloadQRCode("svg")}>SVG</Button>
           </div>
         </motion.div>
       )}
