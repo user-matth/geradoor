@@ -150,7 +150,7 @@ const WhatsappLinkGenerator: React.FC = () => {
       <NavbarSection />
 
       <motion.div
-        className="max-w-screen-md mx-auto w-full h-full max-h-[400px] flex flex-col space-y-2 items-start justify-center"
+        className="max-w-screen-md mx-auto w-full h-full max-h-[400px] hidden md:flex lg:flex flex-col space-y-2 items-start justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
@@ -273,6 +273,71 @@ const WhatsappLinkGenerator: React.FC = () => {
             </motion.div>
           </ResizablePanel>
         </ResizablePanelGroup>
+      </motion.div>
+
+      <motion.div
+        className="max-w-screen-sm mx-auto w-full h-full max-h-[400px] flex md:hidden lg:hidden flex-col space-y-2 items-start justify-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <div className="flex flex-col h-full justify-center w-full mx-auto px-4 max-w-[400px]">
+          <div className="font-semibold leading-none tracking-tight mb-1">Compatilhe links de WhatsApp</div>
+          <div className="text-sm text-muted-foreground mb-6">Digite o número de telefone do WhatsApp que quer criar.</div>
+          <PhoneInput defaultCountry="BR" value={phone ?? ""} onChange={(e) => setPhone(e)} placeholder="(00) 00000-0000" />
+          <Input
+            type="text"
+            placeholder="Customize sua mensagem"
+            className="bg-background mt-4"
+            value={message ?? ""}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <p className="mt-2 font-normal text-sm tracking-tight leading-4">Exemplo: &quot;Olá, eu gostaria de receber mais informações sobre o produto&quot;</p>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="w-full mt-8" onClick={handleGenerate} disabled={phone == ""}>
+                Gerar meu link
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Esse é o seu link do WhatsApp</DialogTitle>
+                <DialogDescription>
+                  Copie e compartilhe em qualquer lugar para ser contactado instantaneamente.
+                </DialogDescription>
+                { loadingQrCode ? (
+                  <div className="flex items-center justify-center w-full h-full py-12">
+                    <Loader className="animate-spin rounded-full h-5 w-5"/>
+                  </div>
+                ) : (
+                  <div className="flex flex-col pt-6">
+                    <div className="flex flex-row items-center justify-center mb-6 mx-auto">
+                      <Link className="underline underline-offset-4" href={qrCodeValue ?? ""} target="_blank" >{qrCodeValue}</Link>
+                      <Button variant="ghost" className="w-7 h-7 p-0 ms-1" onClick={copyLink}>
+                        <Copy />
+                      </Button>
+                    </div>
+                    <QRCodeSVG
+                      className="mx-auto qrcode-svg"
+                      value={qrCodeValue ?? ""}
+                      size={200}
+                      fgColor={theme === "dark" ? "white" : "black"}
+                      bgColor={theme === "dark" ? "black" : "white"}
+                    />
+                    <div className="flex flex-row gap-4 mt-6 justify-center">
+                      <Button variant="secondary" onClick={downloadQRCode}>
+                        Baixar QR Code
+                      </Button>
+                      <Button className="" onClick={copyLink}>
+                        Copiar link
+                      </Button>
+                    </div>
+                  </div>
+                ) }
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        </div>
       </motion.div>
 
       <FooterSection toggleTheme={toggleTheme} />
