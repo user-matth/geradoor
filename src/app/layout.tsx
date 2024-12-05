@@ -3,8 +3,8 @@ import { GeistSans } from "geist/font";
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: {
@@ -45,6 +45,7 @@ export default function RootLayout({
         >
           {children}
           <Analytics />
+          <SpeedInsights />
           <Toaster />
         </ThemeProvider>
       </body>
