@@ -140,7 +140,7 @@ const WhatsappLinkGenerator: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center w-screen h-screen relative overflow-hidden px-8">
       <motion.div
         className="pattern absolute inset-0 -z-10 h-full w-full"
         initial={{ opacity: 0 }}
@@ -276,7 +276,7 @@ const WhatsappLinkGenerator: React.FC = () => {
       </motion.div>
 
       <motion.div
-        className="max-w-screen-sm mx-auto w-full h-full max-h-[400px] flex md:hidden lg:hidden flex-col space-y-2 items-start justify-center"
+        className="max-w-screen-md mx-auto w-full h-full max-h-[400px] flex md:hidden lg:hidden flex-col space-y-2 items-start justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}

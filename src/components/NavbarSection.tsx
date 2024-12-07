@@ -23,7 +23,7 @@ const NavbarSection: React.FC = () => {
 
   return (
     <motion.div
-      className="pointer-events-none fixed inset-x-0 top-0 z-20 mx-auto max-w-screen-sm mt-4 flex px-6"
+      className="pointer-events-none fixed inset-x-0 top-0 z-20 mx-auto max-w-screen-md mt-4 flex px-6"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
@@ -37,6 +37,16 @@ const NavbarSection: React.FC = () => {
           <Button variant="ghost" asChild>
             <Link href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
               CPF
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href={'/cnpj'} className={currentPath === '/cnpj' ? '' : 'text-zinc-500'}>
+              CNPJ
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href={'/cartao-de-credito'} className={currentPath === '/cartao-de-credito' ? '' : 'text-zinc-500'}>
+              Cartão de Crédito
             </Link>
           </Button>
           <Button variant="ghost" asChild>
@@ -60,11 +70,16 @@ const NavbarSection: React.FC = () => {
           <DrawerContent>
             <DrawerHeader>
               <DrawerTitle>Menu</DrawerTitle>
-              {/* <DrawerDescription>Entenda nossa intenção</DrawerDescription> */}
             </DrawerHeader>
             <div className="flex flex-col px-4 pb-12 space-y-2">
               <Link href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
                 CPF
+              </Link>
+              <Link href={'/cnpj'} className={currentPath === '/cnpj' ? '' : 'text-zinc-500'}>
+                CNPJ
+              </Link>
+              <Link href={'/cartao-de-credito'} className={currentPath === '/cartao-de-credito' ? '' : 'text-zinc-500'}>
+                Cartão de Crédito
               </Link>
               <Link href={'/qr-code'} className={currentPath === '/qr-code' ? '' : 'text-zinc-500'}>
                 QRCode
@@ -80,13 +95,24 @@ const NavbarSection: React.FC = () => {
                   <p>Os números são gerados de forma aleatória, e não salvamos nenhum CPF gerado em nossa base, respeitando as regras de criação de cada documento.</p>
                 </div>
               ) }
+              { currentPath === "/cnpj" && (
+                <div className="flex flex-col space-y-4 text-sm">
+                  <Separator className='my-6'/>
+                  <p>Nosso gerador online de CNPJ tem como intenção ajudar estudantes, programadores, analistas e testadores a gerar CNPJ válidos. Normalmente necessários parar testar seus softwares em desenvolvimento.</p>
+                  <p>A má utilização dos dados aqui gerados é de total responsabilidade do usuário.</p>
+                  <p>Os números são gerados de forma aleatória, respeitando as regras de criação de cada documento.</p>
+                </div>
+              ) }
+              { currentPath === "/cartao-de-credito" && (
+                <div className="flex flex-col space-y-4 text-sm">
+                  <Separator className='my-6'/>
+                  <p>Nosso gerador online de Cartão de Crédito tem como intenção ajudar estudantes, programadores, analistas e testadores a gerar Cartões válidos. Normalmente necessários parar testar seus softwares em desenvolvimento.</p>
+                  <p>Esses dados não servem para fazer compras na internet.</p>
+                  <p>A má utilização dos dados aqui gerados é de total responsabilidade do usuário.</p>
+                  <p>Os números são gerados de forma aleatória, respeitando as regras de criação de cada documento.</p>
+                </div>
+              ) }
             </div>
-            {/* <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter> */}
           </DrawerContent>
         </Drawer>
 
@@ -95,33 +121,6 @@ const NavbarSection: React.FC = () => {
             API
           </Link>
         </Button>
-        {/* { currentPath === "/" ? (
-          <Drawer>
-            <DrawerTrigger asChild>
-              <Button variant="link" className='h-8 lg:hidden md:hidden flex'>
-                Saiba mais
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <div className="mx-auto w-full">
-                <DrawerHeader>
-                  <DrawerTitle>Como funciona?</DrawerTitle>
-                  <DrawerDescription>Entenda nossa intenção</DrawerDescription>
-                </DrawerHeader>
-                <div className="p-4 pb-0 flex flex-col space-y-4">
-                  <p>Nosso gerador online de CPF tem como intenção ajudar estudantes, programadores, analistas e testadores a gerar CPF válidos. Normalmente necessários para testar seus softwares em desenvolvimento.</p>
-                  <p>A má utilização dos dados aqui gerados é de total responsabilidade do usuário.</p>
-                  <p>Os números são gerados de forma aleatória, e não salvamos nenhum CPF gerado em nossa base, respeitando as regras de criação de cada documento.</p>
-                </div>
-                <DrawerFooter>
-                  <DrawerClose asChild>
-                    <Button variant="outline">Entendi</Button>
-                  </DrawerClose>
-                </DrawerFooter>
-              </div>
-            </DrawerContent>
-          </Drawer>
-        ) : null} */}
       </div>
     </motion.div>
   );

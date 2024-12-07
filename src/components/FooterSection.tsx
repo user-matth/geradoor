@@ -24,7 +24,7 @@ const FooterSection: React.FC<FooterSectionProps> = ({ toggleTheme }) => {
       transition={{ duration: 0.7, delay: 0.6 }}
     >
       { currentPath === "/" ? (
-        <div className="max-w-screen-sm hidden lg:flex md:flex flex-col mx-auto items-center justify-center text-xs text-center font-normal tracking-tight text-muted-foreground mb-6">
+        <div className="max-w-screen-md hidden lg:flex md:flex flex-col mx-auto items-center justify-center text-xs text-center font-normal tracking-tight text-muted-foreground mb-6">
           <p>
             Nosso gerador online de CPF tem como intenção ajudar estudantes,
             programadores, analistas e testadores a gerar CPF válidos. Normalmente
@@ -39,6 +39,21 @@ const FooterSection: React.FC<FooterSectionProps> = ({ toggleTheme }) => {
             gerado em nossa base, respeitando as regras de criação de cada
             documento.
           </p>
+        </div>
+      ) : null }
+      { currentPath === "/cnpj" ? (
+        <div className="max-w-screen-md hidden lg:flex md:flex flex-col mx-auto items-center justify-center text-xs text-center font-normal tracking-tight text-muted-foreground mb-6">
+          <p>Nosso gerador online de CNPJ tem como intenção ajudar estudantes, programadores, analistas e testadores a gerar CNPJ válidos. Normalmente necessários parar testar seus softwares em desenvolvimento.</p>
+          <p>A má utilização dos dados aqui gerados é de total responsabilidade do usuário.</p>
+          <p>Os números são gerados de forma aleatória, respeitando as regras de criação de cada documento.</p>
+        </div>
+      ) : null }
+      { currentPath === "/cartao-de-credito" ? (
+        <div className="max-w-screen-md hidden lg:flex md:flex flex-col mx-auto items-center justify-center text-xs text-center font-normal tracking-tight text-muted-foreground mb-6">
+          <p>Nosso gerador online de Cartão de Crédito tem como intenção ajudar estudantes, programadores, analistas e testadores a gerar Cartões válidos. Normalmente necessários parar testar seus softwares em desenvolvimento.</p>
+          <p>Esses dados não servem para fazer compras na internet.</p>
+          <p>A má utilização dos dados aqui gerados é de total responsabilidade do usuário.</p>
+          <p>Os números são gerados de forma aleatória, respeitando as regras de criação de cada documento.</p>
         </div>
       ) : null }
       <div className="bg-background dark:bg-primary-dark-2 pointer-events-auto relative mx-auto flex h-full items-center overflow-y-scroll rounded-[14px] px-2 py-2 shadow-[rgba(142,140,152,0.2)_0px_0px_30px,rgba(219,216,224,0.2)_0px_0px_0px_1px] dark:shadow-[rgba(111,109,120,0.1)_0px_0px_30px,rgba(60,57,63,0.4)_0px_0px_0px_1px] sm:overflow-y-visible">

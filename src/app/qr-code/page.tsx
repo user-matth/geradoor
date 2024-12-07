@@ -119,7 +119,7 @@ const QRCodeGenerator: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center w-screen h-screen relative overflow-hidden px-8">
       <motion.div
         className="pattern absolute inset-0 -z-10 h-full w-full"
         initial={{ opacity: 0 }}
@@ -130,7 +130,7 @@ const QRCodeGenerator: React.FC = () => {
 
       {(!qrCodeValue && !loadingQrCode) && (
         <motion.div
-          className="max-w-screen-sm w-full h-full flex flex-col space-y-2 items-center justify-center"
+          className="max-w-screen-md w-full h-full flex flex-col space-y-2 items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -171,7 +171,7 @@ const QRCodeGenerator: React.FC = () => {
 
       {qrCodeValue && (
         <motion.div
-          className="max-w-screen-sm w-full h-full flex flex-col space-y-4 items-center justify-center"
+          className="max-w-screen-md w-full h-full flex flex-col space-y-4 items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

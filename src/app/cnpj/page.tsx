@@ -3,17 +3,17 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
-import { formatCPF, generateCPF } from './utils/cpf_gen';
+import { formatCNPJ, generateCNPJ } from '../utils/cnpj_gen';
 import { Input } from '@/components/ui/input';
 import { toast } from "sonner";
 import { motion } from 'framer-motion';
 import FooterSection from '@/components/FooterSection';
 import NavbarSection from '@/components/NavbarSection';
 
-const CPFGenerator: React.FC = () => {
-  const [cpf, setCpf] = useState<string>('');
+const CNPJGenerator: React.FC = () => {
+  const [cnpj, setCnpj] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const {theme, setTheme} = useTheme();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -24,8 +24,8 @@ const CPFGenerator: React.FC = () => {
   }, [theme]);  
 
   const handleGenerate = () => {
-    const newCpf = generateCPF();
-    setCpf(newCpf);
+    const newCpf = generateCNPJ();
+    setCnpj(newCpf);
   };
 
   const toggleTheme = () => {
@@ -33,10 +33,10 @@ const CPFGenerator: React.FC = () => {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(cpf);
+    navigator.clipboard.writeText(cnpj);
     setCopied(true);
     toast("Copiado pro trem que coisa", {
-      description: "CPF copiado para a área de transferência",
+      description: "CNPJ copiado para a área de transferência",
       action: {
         label: "Cancelar",
         onClick: () => console.log("Cancelar"),
@@ -63,14 +63,14 @@ const CPFGenerator: React.FC = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         <div className="flex flex-col items-center justify-center space-y-3 my-5">
-          <h1 className="text-4xl font-semibold tracking-tighter">Gerador de CPF</h1>
-          <p className="text-lg text-zinc-700 dark:text-zinc-400 font-normal leading-6 tracking-tighter text-center">Clique em &quot;Gerar CPF&quot; e obtenha um número<br />de CPF válido instantaneamente.</p>
+          <h1 className="text-4xl font-semibold tracking-tighter">Gerador de CNPJ</h1>
+          <p className="text-lg text-zinc-700 dark:text-zinc-400 font-normal leading-6 tracking-tighter text-center">Clique em &quot;Gerar CNPJ&quot; e obtenha um número<br />de CNPJ válido instantaneamente.</p>
         </div>
         <Button className="w-full max-w-[250px] mt-8" onClick={handleGenerate}>
-          Gerar CPF
+          Gerar CNPJ
         </Button>
         <div className="flex space-x-2 w-full max-w-[250px] mx-auto">
-          <Input readOnly type="text" placeholder="CPF" className="bg-background" value={formatCPF(cpf)} />
+          <Input readOnly type="text" placeholder="CNPJ" className="bg-background" value={formatCNPJ(cnpj)} />
           <Button variant="outline" onClick={copyToClipboard}>
             {copied ? 'Copiado!' : 'Copiar'}
           </Button>
@@ -81,4 +81,4 @@ const CPFGenerator: React.FC = () => {
   );
 };
 
-export default CPFGenerator;
+export default CNPJGenerator;
