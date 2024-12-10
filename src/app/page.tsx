@@ -13,7 +13,7 @@ import NavbarSection from '@/components/NavbarSection';
 const CPFGenerator: React.FC = () => {
   const [cpf, setCpf] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const {theme, setTheme} = useTheme();
 
   useEffect(() => {
     if (typeof window !== "undefined") {

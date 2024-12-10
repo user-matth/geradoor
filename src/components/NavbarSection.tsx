@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/drawer";
 import { usePathname } from 'next/navigation';
 import { Separator } from './ui/separator';
+import { AnimatedLink } from './PageTransition';
 
 const NavbarSection: React.FC = () => {
   const currentPath = usePathname();
@@ -35,29 +36,29 @@ const NavbarSection: React.FC = () => {
         </Button>
         <div className="mx-auto hidden lg:inline md:inline">
           <Button variant="ghost" asChild>
-            <Link href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
+            <AnimatedLink href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
               CPF
-            </Link>
+            </AnimatedLink>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href={'/cnpj'} className={currentPath === '/cnpj' ? '' : 'text-zinc-500'}>
+            <AnimatedLink href={'/cnpj'} className={currentPath === '/cnpj' ? '' : 'text-zinc-500'}>
               CNPJ
-            </Link>
+            </AnimatedLink>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href={'/cartao-de-credito'} className={currentPath === '/cartao-de-credito' ? '' : 'text-zinc-500'}>
+            <AnimatedLink href={'/cartao-de-credito'} className={currentPath === '/cartao-de-credito' ? '' : 'text-zinc-500'}>
               Cartão de Crédito
-            </Link>
+            </AnimatedLink>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href={'/qr-code'} className={currentPath === '/qr-code' ? '' : 'text-zinc-500'}>
+            <AnimatedLink href={'/qr-code'} className={currentPath === '/qr-code' ? '' : 'text-zinc-500'}>
               QRCode
-            </Link>
+            </AnimatedLink>
           </Button>
           <Button variant="ghost" asChild>
-            <Link href={'/whatsapp'} className={currentPath === '/whatsapp' ? '' : 'text-zinc-500'}>
+            <AnimatedLink href={'/whatsapp'} className={currentPath === '/whatsapp' ? '' : 'text-zinc-500'}>
               Whatsapp
-            </Link>
+            </AnimatedLink>
           </Button>
         </div>
         <Drawer>
@@ -72,21 +73,21 @@ const NavbarSection: React.FC = () => {
               <DrawerTitle>Menu</DrawerTitle>
             </DrawerHeader>
             <div className="flex flex-col px-4 pb-12 space-y-2">
-              <Link href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
+              <AnimatedLink href={'/'} className={currentPath === '/' ? '' : 'text-zinc-500'}>
                 CPF
-              </Link>
-              <Link href={'/cnpj'} className={currentPath === '/cnpj' ? '' : 'text-zinc-500'}>
+              </AnimatedLink>
+              <AnimatedLink href={'/cnpj'} className={currentPath === '/cnpj' ? '' : 'text-zinc-500'}>
                 CNPJ
-              </Link>
-              <Link href={'/cartao-de-credito'} className={currentPath === '/cartao-de-credito' ? '' : 'text-zinc-500'}>
+              </AnimatedLink>
+              <AnimatedLink href={'/cartao-de-credito'} className={currentPath === '/cartao-de-credito' ? '' : 'text-zinc-500'}>
                 Cartão de Crédito
-              </Link>
-              <Link href={'/qr-code'} className={currentPath === '/qr-code' ? '' : 'text-zinc-500'}>
+              </AnimatedLink>
+              <AnimatedLink href={'/qr-code'} className={currentPath === '/qr-code' ? '' : 'text-zinc-500'}>
                 QRCode
-              </Link>
-              <Link href={'/whatsapp'} className={currentPath === '/whatsapp' ? '' : 'text-zinc-500'}>
+              </AnimatedLink>
+              <AnimatedLink href={'/whatsapp'} className={currentPath === '/whatsapp' ? '' : 'text-zinc-500'}>
                 Whatsapp
-              </Link>
+              </AnimatedLink>
               { currentPath === "/" && (
                 <div className="flex flex-col space-y-4 text-sm">
                   <Separator className='my-6'/>
@@ -117,9 +118,9 @@ const NavbarSection: React.FC = () => {
         </Drawer>
 
         <Button variant="link" asChild className='hidden lg:inline md:inline'>
-          <Link href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'} target='_blank' className="ms-auto text-zinc-400">
+          <AnimatedLink href={'https://www.youtube.com/watch?v=dQw4w9WgXcQ'} target='_blank' className="ms-auto text-zinc-400">
             API
-          </Link>
+          </AnimatedLink>
         </Button>
       </div>
     </motion.div>

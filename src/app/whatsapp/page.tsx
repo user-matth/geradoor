@@ -265,8 +265,8 @@ const WhatsappLinkGenerator: React.FC = () => {
                     </div>
                   </div>
                 </PopoverTrigger>
-                <PopoverContent side="top">
-                  <p className="text-sm">Conteúdo apenas para pré-visualização, sem interação / ação existente.</p>
+                <PopoverContent side="top" className="p-2">
+                  <p className="text-xs text-center">Conteúdo apenas para pré-visualização, sem interação / ação existente.</p>
                 </PopoverContent>
               </Popover>
 

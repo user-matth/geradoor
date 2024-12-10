@@ -5,6 +5,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { PageTransition } from "@/components/PageTransition";
+import { AnimatePresence } from "framer-motion";
 
 export const metadata: Metadata = {
   title: {
@@ -43,7 +45,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <AnimatePresence mode="wait">
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </AnimatePresence>
           <Analytics />
           <SpeedInsights />
           <Toaster />
