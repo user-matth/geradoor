@@ -79,7 +79,7 @@ const FooterText = ({ currentPath }: { currentPath: string }) => {
   if (!text) return null;
 
   return (
-    <div className="max-w-screen-md hidden lg:flex md:flex flex-col mx-auto items-center justify-center text-xs text-center font-normal tracking-tight text-muted-foreground mb-6">
+    <div className="max-w-screen-md hidden lg:flex md:flex flex-col max-h-md:hidden mx-auto items-center justify-center text-xs text-center font-normal tracking-tight text-muted-foreground mb-6">
       {text.content.map((paragraph, index) => (
         <p key={index}>{paragraph}</p>
       ))}

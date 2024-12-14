@@ -9,6 +9,11 @@ export default {
   ],
   theme: {
   	extend: {
+			screens: { 
+				'max-h-md': { 
+					'raw': 'only screen and (max-height: 764px)' 
+				}, 
+			},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
