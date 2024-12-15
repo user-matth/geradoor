@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from "sonner";
 import { motion } from 'framer-motion';
 import FooterSection from '@/components/FooterSection';
-import NavbarSection from '@/components/NavbarSection';
+import Navbar from "@/components/Navbar";
 
 const CPFGenerator: React.FC = () => {
   const [cpf, setCpf] = useState<string>('');
@@ -55,7 +55,6 @@ const CPFGenerator: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       ></motion.div>
-      <NavbarSection />
       <motion.div
         className="max-w-screen-md w-full h-full flex flex-col space-y-2 items-center justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -76,7 +75,7 @@ const CPFGenerator: React.FC = () => {
           </Button>
         </div>
       </motion.div>
-      <FooterSection toggleTheme={toggleTheme} />
+      
     </div>
   );
 };

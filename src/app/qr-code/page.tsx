@@ -8,9 +8,9 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react"; // Importando corretamente
 import FooterSection from "@/components/FooterSection";
-import NavbarSection from "@/components/NavbarSection";
 import { ArrowLeft, Loader } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
+import Navbar from "@/components/Navbar";
 
 const QRCodeGenerator: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -126,7 +126,7 @@ const QRCodeGenerator: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       ></motion.div>
-      <NavbarSection />
+      
 
       {(!qrCodeValue && !loadingQrCode) && (
         <motion.div
@@ -197,7 +197,7 @@ const QRCodeGenerator: React.FC = () => {
         </motion.div>
       )}
 
-      <FooterSection toggleTheme={toggleTheme} />
+      
     </div>
   );
 };

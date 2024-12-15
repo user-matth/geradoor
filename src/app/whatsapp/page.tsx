@@ -8,10 +8,8 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
 import FooterSection from "@/components/FooterSection";
-import NavbarSection from "@/components/NavbarSection";
-import { ArrowLeft, Copy, Loader, Send } from "lucide-react";
+import { Copy, Loader, Send } from "lucide-react";
 import { PhoneInput } from "@/components/PhoneInput";
-import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
   ResizableHandle,
@@ -29,6 +27,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Navbar from "@/components/Navbar";
 
 const WhatsappLinkGenerator: React.FC = () => {
   const [phone, setPhone] = useState<string | null>("");
@@ -147,7 +146,6 @@ const WhatsappLinkGenerator: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       ></motion.div>
-      <NavbarSection />
 
       <motion.div
         className="max-w-screen-md mx-auto w-full h-full max-h-[400px] hidden md:flex lg:flex flex-col space-y-2 items-start justify-center"
@@ -338,9 +336,7 @@ const WhatsappLinkGenerator: React.FC = () => {
             </DialogContent>
           </Dialog>
         </div>
-      </motion.div>
-
-      <FooterSection toggleTheme={toggleTheme} />
+      </motion.div>      
     </div>
   );
 };

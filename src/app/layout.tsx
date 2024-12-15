@@ -7,6 +7,8 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { PageTransition } from "@/components/PageTransition";
 import { AnimatePresence } from "framer-motion";
+import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -47,7 +49,13 @@ export default function RootLayout({
         >
           <AnimatePresence mode="wait">
             <PageTransition>
-              {children}
+              <div className="flex flex-col h-screen overflow-hidden">
+                <Navbar />
+                <div className="flex flex-row h-full">
+                  <Sidebar/>
+                  {children}
+                </div>
+              </div>
             </PageTransition>
           </AnimatePresence>
           <Analytics />
