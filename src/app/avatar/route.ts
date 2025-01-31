@@ -14,8 +14,8 @@ export async function GET(request: Request) {
   const computedFontSize = isValidFontSize ? 32 * rawFontSize : 16;
 
   const defaultDimension = 64;
-  let width = defaultDimension;
-  let height = defaultDimension;
+  var width = defaultDimension;
+  var height = defaultDimension;
 
   const ratioParam = searchParams.get("aspectRatio");
   if (ratioParam) {
