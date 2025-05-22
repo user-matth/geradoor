@@ -1,9 +1,13 @@
 import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function QRCodeRedirectPage({ params }: any) {
-  const { shortcode } = params;
+export default async function QRCodeRedirectPage({
+  params,
+}: {
+  params: Promise<{ shortcode: string }>;
+}) {
+  // await the params promise before using .shortcode
+  const { shortcode } = await params;
 
   const qrCode = await prisma.qRCode.findUnique({
     where: { shortcode },
